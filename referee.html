@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#0b0f0c">
+<title>ระบบกรรมการฟุตบอล 7 สี</title>
+<style>
+:root{--bg:#0b0f0c;--card:#171d19;--line:#2a332d;--g:#1fbf5b;--g2:#0f7a3a;--w:#f4f7f5;--mut:#8a978f;--y:#f5c518;--r:#e5322d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--w);font-family:"Sarabun","Noto Sans Thai",system-ui,sans-serif}
+body{max-width:520px;margin:auto;padding:8px 10px 16px;user-select:none}
+button{font:inherit;color:var(--w);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 8px;font-weight:700;font-size:1rem;cursor:pointer}
+button:active{transform:scale(.96)}
+.p{background:var(--g2);border-color:var(--g)}.d{background:#5a1614;border-color:var(--r)}
+input{font:inherit;width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0e1310;color:var(--w);font-size:1.1rem;user-select:text}
+label{display:block;margin:10px 0 4px;color:var(--mut);font-size:.9rem}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px}.hd h1{font-size:1.05rem;margin:0;color:var(--g);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;background:var(--card);border-radius:18px;padding:10px;margin:8px 0;border:1px solid var(--line)}
+.tm{text-align:center}.tm .n{font-weight:800;font-size:1rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc{font-size:3.6rem;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}.cc{font-size:.85rem;color:var(--mut)}
+.pm{display:flex;gap:6px;justify-content:center;margin-top:6px}.pm button{padding:6px 14px;font-size:1.3rem}
+.vs{color:var(--mut);font-weight:800}
+.clk{text-align:center;background:linear-gradient(#0e1310,#141b16);border:1px solid var(--line);border-radius:18px;padding:10px 4px}
+#t{font-size:clamp(64px,24vw,120px);font-weight:900;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:2px}
+#t.x{color:var(--y)}#t.o{color:var(--r)}
+#stt{color:var(--g);font-weight:800;margin-top:2px}
+.sr{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;flex-wrap:wrap}.sr b{color:var(--y);font-size:1.2rem;min-width:70px}.sr button{padding:8px 10px;font-size:.9rem}
+.gr{display:grid;gap:8px;margin-top:8px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}
+.big{padding:20px 8px;font-size:1.25rem}
+.yb{background:#4d4000;border-color:var(--y)}.rb{background:#5a1614;border-color:var(--r)}
+#md{display:none;position:fixed;inset:0;background:#000b;z-index:5;align-items:flex-end;justify-content:center}#md.on{display:flex}
+.box{background:var(--card);width:100%;max-width:520px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.box h2{margin:0 0 6px;font-size:1.15rem}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tg .sel{background:var(--g2);border-color:var(--g)}
+.it{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}.it span button{padding:5px 9px;font-size:.8rem;margin-left:4px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}.tabs .sel{background:var(--g2)}
+#fl{display:none;position:fixed;inset:0;z-index:9;background:#000d;align-items:center;justify-content:center;flex-direction:column;font-size:1.8rem;font-weight:900;text-align:center;padding:20px}#fl.on{display:flex;animation:pop .35s}
+.card{width:130px;height:190px;border-radius:14px;margin-bottom:16px;box-shadow:0 0 50px #fff4}.card.y{background:var(--y)}.card.r{background:var(--r)}
+@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+#ts{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--r);padding:10px 16px;border-radius:12px;z-index:12;display:none;font-weight:700}
+.mut{color:var(--mut);font-size:.9rem}
+.cat{margin:12px 0 -2px;font-weight:800}.g3 button{font-size:.95rem}.bg{background:#0f3d24;border-color:var(--g)}.bo{background:#4a2f08;border-color:#e08a1e}.bb{background:#0e2a4a;border-color:#3b8be0}.bp{background:#3a1450;border-color:#a45ae0}
+#cd{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;flex-direction:column;font-weight:900;text-align:center;padding:20px}#cd.on{display:flex;animation:pop .35s}.big3{width:min(32vmin,170px);height:min(46vmin,250px);animation:spin .6s}@media(orientation:landscape){#cd{flex-direction:row;gap:5vmin}}@keyframes spin{from{transform:rotateY(90deg) scale(.5)}to{transform:none}}
+</style></head><body>
+<div id="setup" style="display:none">
+<h1 style="color:var(--g)">⚽ ตั้งค่าการแข่งขัน</h1>
+<label>ชื่อรายการแข่งขัน</label><input id="s0" maxlength="40">
+<label>ชื่อทีม A</label><input id="s1" maxlength="20">
+<label>ชื่อทีม B</label><input id="s2" maxlength="20">
+<label>ระยะเวลาการแข่งขัน</label>
+<div class="tg"><div><input id="s3" type="number" inputmode="numeric" min="0" placeholder="นาที"><div class="mut">นาที</div></div><div><input id="s4" type="number" inputmode="numeric" min="0" max="59" placeholder="วินาที"><div class="mut">วินาที (0–59)</div></div></div>
+<button class="p big" style="width:100%;margin-top:16px" onclick="ok()">ยืนยันการตั้งค่า</button>
+<div class="mut" style="margin-top:12px">ประวัติการแข่งขันที่บันทึกไว้จะยังอยู่ในเมนู "ผลการแข่งขัน"</div>
+</div>
+<div id="main" style="display:none">
+<div class="hd"><h1 id="nm"></h1><button onclick="menu('ev')">☰ เมนู</button></div>
+<div class="sb">
+<div class="tm"><div class="n" id="nA"></div><div class="sc" id="sA">0</div><div class="cc" id="cA"></div><div class="pm"><button onclick="pl('A',-1)">−</button><button class="p" onclick="pl('A',1)">+</button></div></div>
+<div class="vs">ต่อ</div>
+<div class="tm"><div class="n" id="nB"></div><div class="sc" id="sB">0</div><div class="cc" id="cB"></div><div class="pm"><button onclick="pl('B',-1)">−</button><button class="p" onclick="pl('B',1)">+</button></div></div>
+</div>
+<div class="clk"><div id="t">00:00</div><div id="stt"></div>
+<div class="sr"><span class="mut">เวลาทดเจ็บ</span><b id="sx">+00:00</b><button onclick="sa(60)">เพิ่ม 1 นาที</button><button onclick="sa(-60)">ลด 1 นาที</button><button onclick="sform()">แก้ไข</button><button onclick="sclr()">ล้าง</button></div></div>
+<div class="gr g2"><button id="mb" class="p big" onclick="main()"></button><button class="big" onclick="rst()">รีเซ็ตเวลา</button></div>
+<div class="cat">🔔 เริ่มและจบการแข่งขัน</div>
+<div class="gr g3"><button class="p" onclick="wh('start')">▶️ เริ่มเกม</button><button class="bo" onclick="wh('h1')">⏸ จบครึ่งแรก</button><button class="d" onclick="wh('h2')">🏁 จบครึ่งหลัง</button></div>
+<div class="cat">🔔 เหตุการณ์ในสนาม</div>
+<div class="gr g3"><button class="bb" onclick="ws('out')">↗️ ออก</button><button class="bb" onclick="ws('foul')">✋ ฟาว</button><button class="bb" onclick="ws('off')">🚩 ล้ำหน้า</button><button class="bb" onclick="ws('hand')">🖐 แฮนด์บอล</button><button class="bg" onclick="wh('goal')">⚽ โกล</button><button class="bp" onclick="ws('pen')">🎯 ลูกโทษ</button><button class="bo" onclick="ws('warn')">⚠️ เตือน</button></div>
+<div class="gr g2"><button onclick="stopAll()">🔇 หยุดเสียงฉุกเฉิน</button><button onclick="wh('goal')">🔊 ทดสอบเสียง</button></div>
+<div class="cat">บันทึกสถานะการแข่งขัน (ไม่มีเสียง)</div><div class="gr g2"><button class="bo" onclick="hf(1)">📝 บันทึกจบครึ่งแรก</button><button class="d" onclick="hf(2)">📝 บันทึกจบการแข่งขัน</button></div><input id="vl" type="range" min="0" max="1" step=".05" style="margin-top:8px;padding:0" onchange="S.vol=+this.value;save();wh('goal')">
+<div class="gr g2"><button class="yb big" onclick="showCard('yellow')">🟨 ใบเหลือง</button><button class="rb big" onclick="showCard('red')">🟥 ใบแดง</button></div>
+<div class="gr g2"><button class="big" onclick="form('goal')">⚽ บันทึกประตู</button><button class="big" onclick="evm()">📝 บันทึกเหตุการณ์</button></div>
+<div class="gr"><button id="eb" class="d" onclick="fin()">จบการแข่งขัน</button></div>
+</div>
+<div id="md" onclick="if(event.target==this)cm()"></div><div id="fl"></div><div id="cd"></div><div id="ts"></div>
+<script>
+const $=i=>document.getElementById(i),K='ref7c_v1';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const def=()=>({st:'setup',nm:'ฟุตบอล 7 สี',n:{A:'ทีม A',B:'ทีม B'},dur:300,stop:0,per:'m',rem:300000,end:0,xt:0,s:{A:0,B:0},ev:[],nid:1,vol:.8,snd:true,hist:[]});
+let S;try{S=Object.assign(def(),JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){S=def()}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const p2=n=>String(n).padStart(2,'0'),fm=s=>p2(Math.floor(s/60))+':'+p2(s%60);
+let LK=0;const lk=()=>{const n=Date.now();if(n-LK<350)return true;LK=n;return false};
+const L={start:'เริ่มการแข่งขัน',goal:'ทำประตู',yellow:'ใบเหลือง',red:'ใบแดง',sub:'เปลี่ยนตัว',injury:'ผู้เล่นบาดเจ็บ',pause:'หยุดการแข่งขัน',resume:'เล่นต่อ',extra:'เริ่มช่วงทดเจ็บ',timeup:'หมดเวลา',end:'จบการแข่งขัน',adj:'ลดคะแนน',rst:'รีเซ็ตเวลา'};
+function gt(){if(S.per==='m')return fm(Math.max(0,Math.floor((S.dur*1000-S.rem)/1000)));return fm(S.dur)+'+'+fm(Math.max(0,Math.floor((S.xt*1000-S.rem)/1000)))}
+function log(ty,tm,no,tx){S.ev.push({id:S.nid++,g:gt(),ty,tm:tm||'',no:no||'',tx:tx||''})}
+/* เสียง */
+let AC;function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function tone(t0,d,f,v){const c=ac();if(!c||!S.snd)return;const t=c.currentTime+t0,a=v*S.vol*.5,g=c.createGain(),lf=c.createOscillator(),lg=c.createGain();
+g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(a,t+.02);g.gain.setValueAtTime(a,t+d-.04);g.gain.linearRampToValueAtTime(0,t+d);
+lf.frequency.value=32;lg.gain.value=a*.7;lf.connect(lg);lg.connect(g.gain);g.connect(c.destination);
+[f,f*1.06].forEach(x=>{const o=c.createOscillator();o.frequency.value=x;o.connect(g);o.start(t);o.stop(t+d)});lf.start(t);lf.stop(t+d)}
+function wh(k){ac();if(k==0)tone(0,.35,2900,1);else if(k==1)tone(0,1.3,2900,1);else{tone(0,.3,2900,1);tone(.45,.3,2900,1)}}
+const alertSnd=l=>{if(l){tone(0,.8,2900,1);tone(1,.8,2900,1);tone(2,1.2,2900,1)}else{tone(0,.5,2900,1)}};
+const ding=()=>{tone(0,.12,880,.5);try{navigator.vibrate&&navigator.vibrate(60)}catch(e){}};
+/* เวลา */
+function tick(){if(S.st!=='run')return;const t=Date.now();let r=S.end-t;
+while(r<=0&&S.st==='run'){S.rem=0;
+if(S.per==='m'&&S.stop>0){log('extra');S.per='x';S.xt=S.stop;S.end+=S.stop*1000;r=S.end-t;alertSnd(false);flash('เริ่มช่วงทดเจ็บ')}
+else{log('timeup');S.st='over';alertSnd(true);flash(S.per==='x'?'สิ้นสุดเวลาทดเจ็บ':'หมดเวลาการแข่งขัน');break}}
+if(S.st==='run')S.rem=Math.max(0,S.end-t);save();render()}
+setInterval(tick,200);document.addEventListener('visibilitychange',tick);
+function main(){if(lk())return;ac();
+if(S.st==='ready'){S.end=Date.now()+S.rem;S.st='run';log('start');wl()}
+else if(S.st==='run'){tick();if(S.st!=='run')return;S.rem=S.end-Date.now();S.st='pause';log('pause')}
+else if(S.st==='pause'){S.end=Date.now()+S.rem;S.st='run';log('resume')}
+else if(S.st==='over'){fin();return}
+else if(S.st==='done'){nm();return}
+ding();save();render()}
+async function wl(){try{await navigator.wakeLock.request('screen')}catch(e){}}
+function rst(){if(S.st==='done')return;conf('รีเซ็ตเวลาการแข่งขัน?','เวลาจะกลับไปเริ่มต้น คะแนนและประวัติยังอยู่',()=>{S.per='m';S.xt=0;S.rem=S.dur*1000;S.st='ready';log('rst');save();render()})}
+function sa(d){setStop(S.stop+d)}
+function setStop(v){v=Math.max(0,Math.round(v));const dl=(v-S.stop)*1000;
+if(S.per==='x'){S.xt=v;if(S.st==='run')S.end+=dl;else S.rem=Math.max(0,S.rem+dl)}
+S.stop=v;save();render()}
+function sclr(){conf('ล้างเวลาทดเจ็บ?','',()=>setStop(0))}
+function sform(){modal(`<h2>แก้ไขเวลาทดเจ็บ</h2><div class=tg><div><label>นาที</label><input id=m1 type=number inputmode=numeric min=0 value=${Math.floor(S.stop/60)}></div><div><label>วินาที (0–59)</label><input id=m2 type=number inputmode=numeric min=0 max=59 value=${S.stop%60}></div></div><button class="p big" style="width:100%;margin-top:12px" onclick="ssv()">ยืนยันเวลาทดเจ็บ</button>`)}
+function ssv(){const a=parseInt($('m1').value||0),b=parseInt($('m2').value||0);if(!(a>=0)||!(b>=0&&b<=59)){return toast('วินาทีต้องอยู่ระหว่าง 0–59')}setStop(a*60+b);cm()}
+function fin(){if(S.st==='done')return;conf('จบการแข่งขัน?','ผลจะถูกบันทึกในประวัติการแข่งขัน',()=>{if(S.st==='run')S.rem=Math.max(0,S.end-Date.now());S.st='done';log('end');S.hist.push({id:S.nid++,nm:S.nm,A:S.n.A,B:S.n.B,a:S.s.A,b:S.s.B,d:new Date().toLocaleString('th-TH'),ev:S.ev.length});save();render();alertSnd(false)})}
+/* คะแนน */
+function pl(t,d){if(S.st==='done'||lk())return;if(d>0){S.s[t]++;log('goal',t);ding()}else{if(S.s[t]<=0)return toast('คะแนนติดลบไม่ได้');S.s[t]--;log('adj',t)}save();render()}
+/* ฟอร์มเหตุการณ์ */
+let P='A';
+const tgl=()=>`<label>เลือกทีม</label><div class=tg><button id=pA class="${P=='A'?'sel':''}" onclick="pk('A')">${esc(S.n.A)}</button><button id=pB class="${P=='B'?'sel':''}" onclick="pk('B')">${esc(S.n.B)}</button></div>`;
+function pk(t){P=t;$('pA').className=t=='A'?'sel':'';$('pB').className=t=='B'?'sel':''}
+function evm(){modal(`<h2>บันทึกเหตุการณ์</h2><div class=gr><button class=big onclick="form('sub')">🔄 เปลี่ยนตัวผู้เล่น</button><button class=big onclick="form('injury')">🩹 ผู้เล่นบาดเจ็บ</button><button class=big onclick="form('goal')">⚽ ทำประตู</button></div>`)}
+function form(ty,eid){if(S.st==='done'&&!eid)return toast('การแข่งขันจบแล้ว');const e=eid?S.ev.find(x=>x.id==eid):null;if(e)P=e.tm;
+const nm=ty==='sub'?'หมายเลขผู้เล่นที่ออก':'หมายเลขเสื้อผู้เล่น'+(ty==='goal'?' (ไม่บังคับ)':'');
+modal(`<h2>${L[ty]}${e?' (แก้ไข)':''}</h2>${tgl()}<label>${nm}</label><input id=no type=number inputmode=numeric min=0 max=999 value="${e?esc(e.no):''}">${ty==='sub'?`<label>หมายเลขผู้เล่นที่เข้า</label><input id=no2 type=number inputmode=numeric min=0 max=999 value="${e?esc(e.tx.replace('เข้า ','')):''}">`:''}<button class="p big" style="width:100%;margin-top:12px" onclick="sv('${ty}',${eid||0})">บันทึก</button>`)}
+function sv(ty,eid){if(lk())return;const no=$('no').value.trim(),ok=/^\d{1,3}$/.test(no);
+if(ty!=='goal'&&!ok)return toast('กรุณากรอกหมายเลขเสื้อให้ถูกต้อง');if(ty==='goal'&&no&&!ok)return toast('หมายเลขเสื้อไม่ถูกต้อง');
+let tx='';if(ty==='sub'){const n2=$('no2').value.trim();if(!/^\d{1,3}$/.test(n2))return toast('กรุณากรอกหมายเลขผู้เล่นที่เข้า');tx='เข้า '+n2}
+if(eid){const e=S.ev.find(x=>x.id==eid);if(ty==='goal'&&e.tm!==P){S.s[e.tm]=Math.max(0,S.s[e.tm]-1);S.s[P]++}e.tm=P;e.no=no;e.tx=tx}
+else{const k=ty+P+no+tx,n=Date.now();if(window._lc&&window._lc.k===k&&n-window._lc.t<4000){cm();return toast('บันทึกรายการนี้ไปแล้ว')}window._lc={k,t:n};log(ty,P,no,tx);if(ty==='goal')S.s[P]++;if(ty==='yellow'||ty==='red')showCard(ty,P,no)}
+ding();save();cm();render()}
+function del(id){conf('ลบรายการนี้?','ข้อมูลที่ลบแล้วกู้คืนไม่ได้',()=>{const i=S.ev.findIndex(x=>x.id==id),e=S.ev[i];if(e.ty==='goal')S.s[e.tm]=Math.max(0,S.s[e.tm]-1);S.ev.splice(i,1);save();render();menu('ev')})}
+/* เมนู */
+function line(e){const t=e.tm?S.n[e.tm]:'';let x=e.ty==='sub'?'ออก '+e.no+' '+e.tx:e.no?'หมายเลข '+e.no:'';return `<b>${esc(e.g)}</b> ${L[e.ty]} ${esc(t)} ${esc(x)}`}
+function menu(tab){const T=[['ev','ประวัติ'],['res','ผลการแข่งขัน'],['set','ตั้งค่า']];let h=`<div class=tabs>${T.map(x=>`<button class="${x[0]==tab?'sel':''}" onclick="menu('${x[0]}')">${x[1]}</button>`).join('')}</div>`;
+if(tab==='ev'){h+=`<h2>ประวัติเหตุการณ์</h2>`+(S.ev.length?S.ev.map(e=>`<div class=it><div>${line(e)}</div><span>${['goal','yellow','red','sub','injury'].includes(e.ty)?`<button onclick="form('${e.ty}',${e.id})">แก้ไข</button>`:''}<button class=d onclick="del(${e.id})">ลบ</button></span></div>`).join(''):'<div class=mut>ยังไม่มีเหตุการณ์</div>')}
+else if(tab==='res'){h+=`<h2>ผลการแข่งขัน</h2>`+(S.hist.length?S.hist.slice().reverse().map(m=>`<div class=it><div><b>${esc(m.A)} ${m.a} - ${m.b} ${esc(m.B)}</b><div class=mut>${esc(m.nm)} · ${esc(m.d)}</div></div></div>`).join('')+`<button class=d style="width:100%;margin-top:10px" onclick="conf('ล้างประวัติผลการแข่งขัน?','',()=>{S.hist=[];save();menu('res')})">ล้างผลการแข่งขัน</button>`:'<div class=mut>ยังไม่มีผลที่บันทึก</div>')}
+else{h+=`<h2>ตั้งค่า</h2><button style="width:100%" onclick="S.snd=!S.snd;save();menu('set')">เสียง: ${S.snd?'เปิด':'ปิด'}</button><label>ระดับเสียง</label><input type=range min=0 max=1 step=.05 value=${S.vol} oninput="S.vol=+this.value;save()" onchange="wh(0)"><label>ชื่อรายการ</label><input id=e0 value="${esc(S.nm)}"><label>ชื่อทีม A</label><input id=e1 value="${esc(S.n.A)}"><label>ชื่อทีม B</label><input id=e2 value="${esc(S.n.B)}"><button class=p style="width:100%;margin-top:10px" onclick="en()">บันทึกชื่อ</button><div class=gr><button onclick="nm()">เริ่มแมตช์ใหม่</button><button style="background:#7a0c0c;border-color:#e5322d" onclick="ra()">🔄 รีเซ็ตทุกอย่าง</button></div>`}
+modal(h)}
+function en(){const a=$('e1').value.trim(),b=$('e2').value.trim(),n=$('e0').value.trim();if(!a||!b||!n)return toast('กรุณากรอกชื่อให้ครบ');S.nm=n;S.n.A=a;S.n.B=b;save();render();cm()}
+function nm(){const go=()=>{S.st='setup';save();cm();render()};if(S.st==='done'||S.st==='setup')go();else conf('เริ่มแมตช์ใหม่?','ข้อมูลแมตช์ปัจจุบันจะถูกรีเซ็ต',go)}
+function ok(){const n=$('s0').value.trim(),a=$('s1').value.trim(),b=$('s2').value.trim(),m=parseInt($('s3').value||0),s=parseInt($('s4').value||0);
+if(!n||!a||!b)return toast('กรุณากรอกชื่อรายการและชื่อทีมให้ครบ');if(!(m>=0)||!(s>=0&&s<=59))return toast('วินาทีต้องอยู่ระหว่าง 0–59');if(m*60+s<1)return toast('เวลาต้องไม่น้อยกว่า 1 วินาที');
+Object.assign(S,{st:'ready',nm:n,n:{A:a,B:b},dur:m*60+s,rem:(m*60+s)*1000,per:'m',xt:0,stop:0,end:0,s:{A:0,B:0},ev:[]});save();render()}
+/* UI */
+function modal(h){$('md').innerHTML='<div class=box>'+h+'</div>';$('md').className='on'}
+function cm(){$('md').className=''}
+function conf(t,s,f){window._cf=f;modal(`<h2>${t}</h2><div class=mut>${s}</div><div class=tg style="margin-top:14px"><button onclick="cm()">ยกเลิก</button><button class=d onclick="cm();_cf()">ยืนยัน</button></div>`)}
+let TT;function toast(m){const t=$('ts');t.textContent=m;t.style.display='block';clearTimeout(TT);TT=setTimeout(()=>t.style.display='none',2200)}
+let FT;function flash(m,c){const f=$('fl');f.innerHTML=(c?`<div class="card ${c}"></div>`:'')+esc(m);f.className='on';clearTimeout(FT);FT=setTimeout(()=>f.className='',c?2200:1800);f.onclick=()=>f.className=''}
+function render(){const su=S.st==='setup';$('setup').style.display=su?'block':'none';$('main').style.display=su?'none':'block';
+if(su){if(!$('s0').dataset.f){$('s0').value=S.nm;$('s1').value=S.n.A;$('s2').value=S.n.B;$('s3').value=Math.floor(S.dur/60);$('s4').value=S.dur%60;$('s0').dataset.f=1}return}
+$('s0').dataset.f='';$('nm').textContent=S.nm;
+['A','B'].forEach(t=>{$('n'+t).textContent=S.n[t];$('s'+t).textContent=S.s[t];$('c'+t).textContent='🟨 '+S.ev.filter(e=>e.tm==t&&e.ty=='yellow').length+'  🟥 '+S.ev.filter(e=>e.tm==t&&e.ty=='red').length});
+const sec=Math.ceil(S.rem/1000),T=$('t');T.textContent=fm(sec);T.className=S.per==='x'?'x':S.st==='over'||S.st==='done'?'o':'';
+$('sx').textContent='+'+fm(S.stop);
+$('stt').textContent={ready:'พร้อมแข่งขัน',run:S.per==='x'?'ช่วงทดเจ็บ':'กำลังแข่งขัน',pause:'หยุดเวลา',over:S.per==='x'?'สิ้นสุดเวลาทดเจ็บ':'หมดเวลาการแข่งขัน',done:'จบการแข่งขัน'}[S.st];
+$('mb').textContent={ready:'เริ่มการแข่งขัน',run:'หยุดเวลา',pause:'เล่นเวลาต่อ',over:'จบการแข่งขัน',done:'เริ่มแมตช์ใหม่'}[S.st];
+$('eb').style.display=S.st==='done'?'none':'block'}
+/* PWA */
+try{const ic='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="#0b0f0c"/><circle cx="50" cy="50" r="30" fill="#1fbf5b"/></svg>');
+const mf={name:'ระบบกรรมการฟุตบอล 7 สี',short_name:'กรรมการ 7 สี',display:'standalone',orientation:'portrait',background_color:'#0b0f0c',theme_color:'#0b0f0c',start_url:location.href.split('#')[0],icons:[{src:ic,sizes:'any',type:'image/svg+xml'}]};
+const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));document.head.appendChild(l)}catch(e){}
+Object.assign(L,{out:'ออก',foul:'ฟาว',off:'ล้ำหน้า',hand:'แฮนด์บอล',pen:'ลูกโทษ',warn:'เตือนผู้เล่น',h1:'จบครึ่งแรก',h2:'จบครึ่งหลัง'});
+let NS=[],CT;
+function tone(t0,d,f,v){const c=ac();if(!c||!S.snd)return;const t=c.currentTime+t0,a=v*S.vol*.5,g=c.createGain(),lf=c.createOscillator(),lg=c.createGain();
+g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(a,t+.02);g.gain.setValueAtTime(a,t+d-.04);g.gain.linearRampToValueAtTime(0,t+d);
+lf.frequency.value=32;lg.gain.value=a*.7;lf.connect(lg);lg.connect(g.gain);g.connect(c.destination);
+const os=[f,f*1.06].map(x=>{const o=c.createOscillator();o.frequency.value=x;o.connect(g);o.start(t);o.stop(t+d);return o});os.push(lf);lf.start(t);lf.stop(t+d);NS.push({os,g})}
+function stopAll(){NS.forEach(n=>{try{n.g.gain.cancelScheduledValues(0);n.g.gain.value=0}catch(e){}n.os.forEach(o=>{try{o.stop()}catch(e){}})});NS=[]}
+const WP={start:[2900,[[0,.35]]],out:[2850,[[0,.5]]],foul:[2850,[[0,.5]]],off:[2850,[[0,.5]]],hand:[2850,[[0,.5]]],goal:[2950,[[0,.8]]],pen:[3000,[[0,1.6]]],warn:[3150,[[0,.14],[.26,.14],[.52,.14]]],h1:[2900,[[0,.35],[.65,1.3]]],h2:[2900,[[0,.3],[.5,.3],[1.05,1.4]]]};
+function wh(k){ac();if(typeof k==='number')k=['start','pen','warn'][k];const p=WP[k];if(!p)return;stopAll();p[1].forEach(x=>tone(x[0],x[1],p[0],1))}
+function ws(k){if(lk())return;wh(k);if(['run','pause','over'].includes(S.st)){log(k);save();render()}try{navigator.vibrate&&navigator.vibrate(40)}catch(e){}}
+function sg(){if(S.st==='setup'||S.st==='done')return toast('กรุณาตั้งค่าแมตช์ใหม่ก่อน');ac();if(S.st==='ready'||S.st==='pause')main();wh('start')}
+function hf(h){if(S.st==='ready'||S.st==='setup'||S.st==='done')return toast('ยังไม่ได้เริ่มการแข่งขัน');
+if(h===1){if(lk())return;if(S.h1)return toast('บันทึกจบครึ่งแรกไปแล้ว');tick();if(S.st==='run'){S.rem=Math.max(0,S.end-Date.now());S.st='pause'}S.h1=1;log('h1');flash('จบครึ่งแรก');save();render()}
+else conf('จบครึ่งหลัง?','จะบันทึกผลและจบการแข่งขัน',endMatch)}
+function endMatch(){if(S.st==='done')return;tick();if(S.st==='run')S.rem=Math.max(0,S.end-Date.now());S.st='done';log('h2');log('end');S.hist.push({id:S.nid++,nm:S.nm,A:S.n.A,B:S.n.B,a:S.s.A,b:S.s.B,d:new Date().toLocaleString('th-TH'),ev:S.ev.length});save();render();
+const c=(t,y)=>S.ev.filter(e=>e.tm==t&&e.ty==y).length;
+modal(`<h2>ผลการแข่งขันสุดท้าย</h2><div style="text-align:center"><div class=mut>${esc(S.nm)}</div><div style="font-size:2.2rem;font-weight:900;margin:8px 0">${esc(S.n.A)} ${S.s.A} - ${S.s.B} ${esc(S.n.B)}</div><div class=mut>🟨 ${c('A','yellow')} 🟥 ${c('A','red')} · 🟨 ${c('B','yellow')} 🟥 ${c('B','red')}</div></div><button class="p big" style="width:100%;margin-top:14px" onclick="cm()">ปิด</button>`)}
+function cardSnd(){tone(0,.18,660,.8);tone(.25,.18,660,.8);tone(.5,.5,440,.8)}
+function showCard(ty,t,no){const f=$('cd'),y=ty==='yellow';cardSnd();try{navigator.vibrate&&navigator.vibrate([120,60,120])}catch(e){}
+f.style.background=y?'#f5c518':'#e5322d';f.style.color=y?'#111':'#fff';
+f.innerHTML=`<div class="card ${y?'y':'r'} big3" style="box-shadow:0 0 0 6px ${y?'#111':'#fff'}"></div><div style="font-size:3rem">${y?'ใบเหลือง':'ใบแดง'}</div><div style="font-size:1.8rem;margin-top:8px">${esc(S.n[t])}</div><div style="font-size:3.6rem">เบอร์ ${esc(no)}</div><button style="margin-top:20px;background:#111;color:#fff;padding:14px 40px" onclick="fc()">ปิด</button>`;
+f.className='on';clearTimeout(CT);CT=setTimeout(fc,2800)}
+function fc(){clearTimeout(CT);$('cd').className=''}
+let WE=0;
+function stopAll(){NS.forEach(n=>{try{n.g.gain.cancelScheduledValues(0);n.g.gain.value=0}catch(e){}n.os.forEach(o=>{try{o.stop()}catch(e){}})});NS=[];WE=0}
+function wh(k){const c=ac();if(!c)return;if(typeof k==='number')k=['start','pen','warn'][k];const p=WP[k];if(!p)return;
+const now=c.currentTime,off=Math.max(0,WE-now);if(off>10)return;
+let len=0;p[1].forEach(x=>{tone(off+x[0],x[1],p[0],1);len=Math.max(len,x[0]+x[1])});WE=now+off+len+.12;
+if(NS.length>40)NS=NS.filter(n=>true).slice(-20);try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}}
+function ws(k){wh(k)}
+function sg(){wh('start')}
+let CB=null;
+function showCard(ty,t,no){
+if(t!==undefined){toast((ty==='yellow'?'บันทึกใบเหลือง ':'บันทึกใบแดง ')+S.n[t]+' เบอร์ '+no);return}
+if(S.st==='done'||S.st==='setup')return toast('การแข่งขันจบแล้ว');
+const f=$('cd');if(f.className==='on')return;const y=ty==='yellow',bg=y?'#ffdd00':'#e5122d';cardSnd();try{navigator.vibrate&&navigator.vibrate([120,60,120])}catch(e){}
+f.style.background=bg;f.style.color=y?'#000':'#fff';CB=ty;
+f.innerHTML=`<div class="card ${y?'y':'r'} big3" style="background:${bg};box-shadow:0 0 0 6px ${y?'#000':'#fff'}"></div><div><div style="font-size:clamp(2.4rem,13vmin,5rem)">${y?'ใบเหลือง':'ใบแดง'}</div><button style="margin-top:18px;background:#111;color:#fff;padding:14px 40px" onclick="fc()">ปิด</button></div>`;
+f.className='on';clearTimeout(CT);CT=setTimeout(fc,2500)}
+function fc(){clearTimeout(CT);$('cd').className='';const y=CB;CB=null;if(y)form(y)}
+function ra(){modal(`<h2>⚠️ ยืนยันการรีเซ็ตทุกอย่าง</h2><div style="margin:8px 0 14px">คุณกำลังจะรีเซ็ตระบบทั้งหมดกลับสู่ค่าเริ่มต้น ข้อมูลการแข่งขันและการตั้งค่าทั้งหมดจะถูกลบ การดำเนินการนี้ไม่สามารถย้อนกลับได้ คุณแน่ใจหรือไม่?</div><div class=tg><button style="background:#555" onclick="cm()">ยกเลิก</button><button id=rb class=d disabled style="background:#b3171a;opacity:.5" onclick="doReset()">ยืนยันรีเซ็ตทั้งหมด</button></div>`);
+setTimeout(()=>{const b=$('rb');if(b){b.disabled=false;b.style.opacity=1}},1500)}
+function doReset(){stopAll();fc();CB=null;clearTimeout(FT);$('fl').className='';window._lc=null;
+try{localStorage.removeItem(K)}catch(e){}
+S=def();$('s0').dataset.f='';$('vl').value=S.vol;cm();render();
+toast('รีเซ็ตระบบทั้งหมดเรียบร้อยแล้ว');const t=$('ts');t.style.background='#0f7a3a';setTimeout(()=>t.style.background='',2400)}
+$('vl').value=S.vol;
+render();tick();
+</script></body></html>
